@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 public class GameAccount {
     private int id;
     private int accountBalance;
+    private User user;
 
     public GameAccount(int accountBalance) {
         this.accountBalance = accountBalance;
@@ -32,6 +33,16 @@ public class GameAccount {
     @Column(name = "ACCOUNT_BALANCE")
     public int getAccountBalance() {
         return accountBalance;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setId(int id) {

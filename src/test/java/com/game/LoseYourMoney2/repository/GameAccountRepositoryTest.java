@@ -2,6 +2,7 @@ package com.game.LoseYourMoney2.repository;
 
 import com.game.LoseYourMoney2.domain.GameAccount;
 import com.game.LoseYourMoney2.domain.User;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class GameAccountRepositoryTest {
     @Autowired
     private GameAccountRepository gameAccountRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Test
     public void testGameAccountRepositorySave(){
         //Given
@@ -30,6 +34,24 @@ public class GameAccountRepositoryTest {
         int id = gameAccount.getId();
         Optional<GameAccount> readAccount = gameAccountRepository.findById(id);
         assertTrue(readAccount.isPresent());
+
+        //CleanUp
+        gameAccountRepository.deleteById(id);
+    }
+
+    @Test
+    public void testGameAccountRepositorySaveWithUser(){
+        //Given
+        GameAccount gameAccount = new GameAccount(2000);
+        User user = new User("B", "At", "kent@smith.com");
+        gameAccount.setUser(user);
+
+        //When
+        gameAccountRepository.save(gameAccount);
+        int id = gameAccount.getId();
+
+        //Then
+        Assert.assertNotEquals(0, id);
 
         //CleanUp
         gameAccountRepository.deleteById(id);
