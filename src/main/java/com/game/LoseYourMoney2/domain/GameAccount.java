@@ -16,6 +16,7 @@ public class GameAccount {
     private int id;
     private int accountBalance;
     private User user;
+    private CurrentDraw currentDraw;
 
     public GameAccount(int accountBalance) {
         this.accountBalance = accountBalance;
@@ -40,6 +41,10 @@ public class GameAccount {
     public User getUser() {
         return user;
     }
+    @ManyToOne
+    public CurrentDraw getCurrentDraw() {
+        return currentDraw;
+    }
 
     public void setUser(User user) {
         this.user = user;
@@ -51,5 +56,8 @@ public class GameAccount {
 
     public void setAccountBalance(int accountBalance) {
         this.accountBalance = accountBalance;
+    }
+    public void setCurrentDraw(CurrentDraw currentDraw) {
+        this.currentDraw = currentDraw;
     }
 }
