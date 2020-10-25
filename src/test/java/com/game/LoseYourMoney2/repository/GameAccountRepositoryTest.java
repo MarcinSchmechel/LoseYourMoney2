@@ -19,9 +19,6 @@ public class GameAccountRepositoryTest {
     @Autowired
     private GameAccountRepository gameAccountRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Test
     public void testGameAccountRepositorySave(){
         //Given
